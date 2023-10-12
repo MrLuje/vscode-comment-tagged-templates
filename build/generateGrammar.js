@@ -4,7 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const { languages } = require('./languages');
 
-const targetScopes = ['source.js', 'source.jsx', 'source.js.jsx', 'source.ts', 'source.tsx']
+const targetScopes = [
+'source.fsharp',
+'source.fsharp.fsi',
+'source.fsharp.fsx',
+'source.fsharp.fsl'
+]
 
 const basicGrammarTemplate = {
     "fileTypes": [],
@@ -31,12 +36,12 @@ const getBasicGrammarPattern = (language) => {
         contentName: `meta.embedded.block.${language.name}`,
 
         // The leading '/' was consumed by outer rule
-        begin: `(?i)(\\*\\s*\\b(?:${language.identifiers.map(escapeRegExp).join('|')})\\b\\s*\\*/)\\s*(\`)`,
+        begin: `(?i)(\\*\\s*\\b(?:${language.identifiers.map(escapeRegExp).join('|')})\\b\\s*\\*\\))\\s*(""")`,
         beginCaptures: {
-            1: { name: 'comment.block.ts' },
-            2: { name: 'punctuation.definition.string.template.begin.js' }
+            1: { name: 'comment.block.fsharp' },
+            2: { name: 'punctuation.definition.string.begin.fsharp' }
         },
-        end: '(?=`)',
+        end: `(?=""")`,
         patterns: [
             ...sources.map(source => ({ 'include': source })),
             // When a language grammar is not installed, insert a phony pattern
@@ -56,18 +61,20 @@ const getBasicGrammar = () => {
         return repository;
     }, {});
 
+    // @ts-ignore
     const allLanguageIdentifiers = [].concat(...languages.map(x => x.identifiers));
     basicGrammar.patterns = [
+        // @ts-ignore
         {
             // Match entire language comment identifier but only consume '/'
-            begin: `(?i)(/)(?=(\\*\\s*\\b(?:${allLanguageIdentifiers.map(escapeRegExp).join('|')})\\b\\s*\\*/)\\s*\`)`,
+            begin: `(?i)(\\()(?=(\\*\\s*\\b(?:${allLanguageIdentifiers.map(escapeRegExp).join('|')})\\b\\s*\\*\\))\\s*""")`,
             beginCaptures: {
-                1: { name: 'comment.block.ts' }
+                1: { name: 'comment.block.fsharp' }
             },
-            end: '(`)',
+            end: '(""")',
             endCaptures: {
-                0: { name: 'string.js' },
-                1: { name: 'punctuation.definition.string.template.end.js' }
+                0: { name: 'string.quoted.double.fsharp' },
+                1: { name: 'punctuation.definition.string.end.fsharp' }
             },
             patterns: languages.map(language => ({ include: '#' + getRepositoryName(language) }))
         }

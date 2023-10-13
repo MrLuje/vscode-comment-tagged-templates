@@ -40,8 +40,8 @@
                     "text.html.derivative",
                     "text.html.markdown"
                 ],
-                "scopeName": "inline.template-tagged-languages",
-                "path": "./syntaxes/grammar.json",
+                "scopeName": "inline.javascript.template-tagged-languages",
+                "path": "./syntaxes/grammar-javascript.json",
                 "embeddedLanguages": {
                     "meta.embedded.block.css": "css",
                     "meta.embedded.block.basic": "html",
@@ -103,8 +103,8 @@
                     "text.html.derivative",
                     "text.html.markdown"
                 ],
-                "scopeName": "inline.template-tagged-languages.reinjection",
-                "path": "./syntaxes/reinject-grammar.json",
+                "scopeName": "inline.javascript.template-tagged-languages.reinjection",
+                "path": "./syntaxes/reinject-grammar-javascript.json",
                 "embeddedLanguages": {
                     "meta.template.expression.ts": "typescript"
                 }
@@ -116,8 +116,8 @@
                     "source.fsharp.fsx",
                     "source.fsharp.fsl"
                 ],
-                "scopeName": "inline.template-tagged-languages",
-                "path": "./syntaxes/grammar.json",
+                "scopeName": "inline.fsharp.template-tagged-languages",
+                "path": "./syntaxes/grammar-fsharp.json",
                 "embeddedLanguages": {
                     "meta.embedded.block.css": "css",
                     "meta.embedded.block.basic": "html",
@@ -175,8 +175,8 @@
                     "source.fsharp.fsx",
                     "source.fsharp.fsl"
                 ],
-                "scopeName": "inline.template-tagged-languages.reinjection",
-                "path": "./syntaxes/reinject-grammar.json",
+                "scopeName": "inline.fsharp.template-tagged-languages.reinjection",
+                "path": "./syntaxes/reinject-grammar-fsharp.json",
                 "embeddedLanguages": {
                     "meta.template.expression.ts": "typescript"
                 }
